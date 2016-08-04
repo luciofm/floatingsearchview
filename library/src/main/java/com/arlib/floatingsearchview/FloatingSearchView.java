@@ -1180,6 +1180,15 @@ public class FloatingSearchView extends FrameLayout {
         return updatedToNotFocused;
     }
 
+    public boolean isLeftBadgeEnabled() {
+        return mLeftBadgeEnabled;
+    }
+
+    public void setLeftBadgeEnabled(boolean enabled) {
+        this.mLeftBadgeEnabled = enabled;
+        mLeftBadge.setAutoShowHide(enabled);
+    }
+
     public void setLeftBadgeCount(int count) {
         if (mLeftBadgeEnabled)
             mLeftBadge.setCount(count);
@@ -1422,6 +1431,8 @@ public class FloatingSearchView extends FrameLayout {
             if (mFocusChangeListener != null) {
                 mFocusChangeListener.onFocus();
             }
+            if (mLeftBadgeEnabled)
+                mLeftBadge.setEnabled(false);
         } else {
             mMainLayout.requestFocus();
             clearSuggestions();
@@ -1441,6 +1452,8 @@ public class FloatingSearchView extends FrameLayout {
             if (mFocusChangeListener != null) {
                 mFocusChangeListener.onFocusCleared();
             }
+            if (mLeftBadgeEnabled)
+                mLeftBadge.setEnabled(true);
         }
 
         //if we don't have focus, we want to allow the client's views below our invisible

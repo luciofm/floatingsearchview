@@ -1,12 +1,10 @@
 package com.arlib.floatingsearchview.util.view;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
-import android.graphics.Outline;
 import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
@@ -14,14 +12,12 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
-import android.os.Build;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorCompat;
 import android.support.v4.view.ViewPropertyAnimatorListenerAdapter;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewOutlineProvider;
 import android.view.animation.Interpolator;
 import android.widget.ImageView;
 
@@ -37,6 +33,7 @@ public class BadgeView extends ImageView {
     private ViewPropertyAnimatorCompat animator;
     private static final Interpolator INTERPOLATOR = new LinearOutSlowInInterpolator();
 
+    boolean enabled = true;
     boolean autoShowHide;
 
     public BadgeView(Context context) {
@@ -91,6 +88,20 @@ public class BadgeView extends ImageView {
         ViewCompat.setElevation(this, BadgeDrawable.dipToPixels(2));*/
     }
 
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+        if (enabled)
+            animateIn(0);
+        else if (!enabled)
+            animateOut();
+    }
+
     public boolean isAutoShowHide() {
         return autoShowHide;
     }
@@ -101,6 +112,9 @@ public class BadgeView extends ImageView {
     }
 
     public void setCount(int count) {
+        if (!enabled)
+            return;
+
         int oldCount = drawable.getNumber();
         drawable.setNumber(count);
         if (autoShowHide) {
