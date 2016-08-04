@@ -15,10 +15,19 @@
         android:fitsSystemWindows="true"
         tools:context=".MainActivity">
 
+        <Button
+            android:id="@+id/badge_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="Change Badge"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/search_results_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="52dp"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             android:paddingTop="60dp"
@@ -38,6 +47,7 @@
             app:floatingSearch_showSearchKey="true"
             app:floatingSearch_suggestionsListAnimDuration="250"
             app:floatingSearch_dimBackground="false"
-            app:floatingSearch_close_search_on_keyboard_dismiss="true"/>
+            app:floatingSearch_close_search_on_keyboard_dismiss="true"
+            app:floatingSearch_enableLeftBadge="true"/>
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

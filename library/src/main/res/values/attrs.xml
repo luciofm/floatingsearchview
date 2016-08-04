@@ -34,5 +34,15 @@
         <attr name="floatingSearch_hintTextColor" format="color"/>
         <attr name="floatingSearch_dimBackground" format="boolean"/>
         <attr name="floatingSearch_suggestionRightIconColor" format="color"/>
+        <attr name="floatingSearch_enableLeftBadge" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="BadgeView">
+        <attr name="badgeView_color" format="color" />
+        <attr name="badgeView_textColor" format="color" />
+        <attr name="badgeView_textSize" format="dimension" />
+        <attr name="badgeView_count" format="integer" />
+        <attr name="badgeview_numberOverflow" format="string" />
+        <attr name="badgeView_autoShowHide" format="boolean" />
     </declare-styleable>
 </resources>

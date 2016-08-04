@@ -18,7 +18,6 @@ package com.arlib.floatingsearchviewdemo;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -29,6 +28,7 @@ import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
     private String mLastQuery = "";
 
+    int count = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +75,16 @@ public class MainActivity extends AppCompatActivity {
         setupFloatingSearch();
         setupResultsList();
         setupDrawer();
+
+        Button button = (Button) findViewById(R.id.badge_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSearchView.setLeftBadgeCount(count);
+                if (count++ > 11)
+                    count = 0;
+            }
+        });
     }
 
     private void setupFloatingSearch() {

@@ -44,7 +44,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -55,7 +54,6 @@ import android.view.WindowManager;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -69,6 +67,7 @@ import com.arlib.floatingsearchview.util.Util;
 import com.arlib.floatingsearchview.util.adapter.GestureDetectorListenerAdapter;
 import com.arlib.floatingsearchview.util.adapter.OnItemTouchListenerAdapter;
 import com.arlib.floatingsearchview.util.adapter.TextWatcherAdapter;
+import com.arlib.floatingsearchview.util.view.BadgeView;
 import com.arlib.floatingsearchview.util.view.MenuView;
 import com.arlib.floatingsearchview.util.view.SearchInputView;
 import com.bartoszlipinski.viewpropertyobjectanimator.ViewPropertyObjectAnimator;
@@ -148,6 +147,7 @@ public class FloatingSearchView extends FrameLayout {
     private ImageView mLeftAction;
     private OnLeftMenuClickListener mOnMenuClickListener;
     private OnHomeActionClickListener mOnHomeActionClickListener;
+    private BadgeView mLeftBadge;
     private ProgressBar mSearchProgress;
     private DrawerArrowDrawable mMenuBtnDrawable;
     private Drawable mIconBackArrow;
@@ -169,6 +169,7 @@ public class FloatingSearchView extends FrameLayout {
     private int mBackgroundColor;
     private boolean mSkipQueryFocusChangeEvent;
     private boolean mSkipTextChangeEvent;
+    private boolean mLeftBadgeEnabled;
 
     private View mDivider;
     private int mDividerColor;
@@ -345,6 +346,7 @@ public class FloatingSearchView extends FrameLayout {
         mSearchInput = (SearchInputView) findViewById(R.id.search_bar_text);
         mSearchInputParent = findViewById(R.id.search_input_parent);
         mLeftAction = (ImageView) findViewById(R.id.left_action);
+        mLeftBadge = (BadgeView) findViewById(R.id.left_badge);
         mSearchProgress = (ProgressBar) findViewById(R.id.search_bar_search_progress);
         initDrawables();
         mClearButton.setImageDrawable(mIconClear);
@@ -517,6 +519,9 @@ public class FloatingSearchView extends FrameLayout {
                     , Util.getColor(getContext(), R.color.hint_color)));
             setSuggestionRightIconColor(a.getColor(R.styleable.FloatingSearchView_floatingSearch_suggestionRightIconColor
                     , Util.getColor(getContext(), R.color.gray_active_icon)));
+
+            mLeftBadgeEnabled = a.getBoolean(R.styleable.FloatingSearchView_floatingSearch_enableLeftBadge, false);
+            mLeftBadge.setAutoShowHide(mLeftBadgeEnabled);
         } finally {
             a.recycle();
         }
@@ -1173,6 +1178,11 @@ public class FloatingSearchView extends FrameLayout {
             }
         }
         return updatedToNotFocused;
+    }
+
+    public void setLeftBadgeCount(int count) {
+        if (mLeftBadgeEnabled)
+            mLeftBadge.setCount(count);
     }
 
     private void setupSuggestionSection() {
