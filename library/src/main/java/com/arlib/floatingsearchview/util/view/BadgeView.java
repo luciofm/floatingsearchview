@@ -79,7 +79,7 @@ public class BadgeView extends ImageView {
         }
 
         setImageDrawable(drawable);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ViewOutlineProvider provider = new ViewOutlineProvider() {
                 @Override
                 public void getOutline(View view, Outline outline) {
@@ -88,7 +88,7 @@ public class BadgeView extends ImageView {
             };
             setOutlineProvider(provider);
         }
-        ViewCompat.setElevation(this, BadgeDrawable.dipToPixels(2));
+        ViewCompat.setElevation(this, BadgeDrawable.dipToPixels(2));*/
     }
 
     public boolean isAutoShowHide() {
