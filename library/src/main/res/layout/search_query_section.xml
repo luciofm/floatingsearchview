@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/search_query_section"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
-    card_view:cardUseCompatPadding="true">
+    app:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -30,6 +31,15 @@
                 android:clickable="true"
                 android:padding="@dimen/square_button_padding"
                 android:src="@drawable/ic_arrow_back_black_24dp" />
+
+            <com.arlib.floatingsearchview.util.view.BadgeView
+                android:id="@+id/left_badge"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="4dp"
+                app:badgeView_autoShowHide="true"
+                app:badgeView_textSize="11sp"/>
 
             <ProgressBar
                 android:id="@+id/search_bar_search_progress"
