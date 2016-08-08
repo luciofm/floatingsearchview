@@ -69,7 +69,7 @@
                 android:background="@color/transparent"
                 android:ellipsize="end"
                 android:hint="@string/abc_search_hint"
-                android:imeOptions="actionSearch"
+                android:imeOptions="actionSearch|flagNoExtractUi"
                 android:inputType="textNoSuggestions"
                 android:maxLines="1"
                 android:minHeight="@dimen/square_button_size"
